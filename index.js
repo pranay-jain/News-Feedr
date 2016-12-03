@@ -42,7 +42,7 @@ app.post('/webhook/', function (req, res) {
         }
     }
     res.sendStatus(200)
-})
+});
 
 const token = process.env.FB_PAGE_ACCESS_TOKEN
 
