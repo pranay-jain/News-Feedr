@@ -1,5 +1,5 @@
 {
-  "name": "News Feedr",
+  "name": "News-Feedr",
   "version": "1.0.0",
   "description": "A Messenger chat bot to display news",
   "main": "app.js",
@@ -7,12 +7,12 @@
     "start": "node app.js"
   },
   "repository": {
-      "type": "git",
-      "url": "https://github.com/fbsamples/messenger-platform-samples.git"
+    "type": "git",
+    "url": "https://github.com/pranay-jain/News-Feedr.git"
   },
   "dependencies": {
-       "body-parser": "^1.15.0",
-       "ejs": "^2.4.2",
-       "express": "^4.13.4"
-   }  
+    "body-parser": "^1.15.0",
+    "ejs": "^2.4.2",
+    "express": "^4.14.0"
+  }
 }
