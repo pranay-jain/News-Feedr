@@ -67,7 +67,7 @@ function receivedTextMessage(text) {
   }
   //}
 
-  var theUrl="https://newsapi.org/v1/sources?category="+s;
+  var theUrl= "https://newsapi.org/v1/sources?category=" +s;
 
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open( "GET", theUrl, false ); // false for synchronous request

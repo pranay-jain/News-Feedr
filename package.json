@@ -11,10 +11,10 @@
     "url": "https://github.com/pranay-jain/News-Feedr.git"
   },
   "dependencies": {
-    "xmlhttprequest": "^1.8.0",
     "body-parser": "^1.15.0",
     "ejs": "^2.4.2",
     "express": "^4.14.0",
-    "request": "^2.79.0"
+    "request": "^2.79.0",
+    "xmlhttprequest": "^1.8.0"
   }
 }
