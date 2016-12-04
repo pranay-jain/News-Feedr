@@ -38,7 +38,7 @@ app.post('/webhook/', function (req, res) {
         let sender = event.sender.id
         if (event.message && event.message.text) {
             let text = receivedTextMessage(event.message.text)
-            sendTextMessage(sender, "Text received, bitch: " + text.substring(0, 200))
+            sendTextMessage(sender, text)
         }
     }
     res.sendStatus(200)
@@ -47,25 +47,74 @@ app.post('/webhook/', function (req, res) {
 function receivedTextMessage(text) {
   //var dict = dictionary;
   var dictionary = {
-  	"economics": ["economics"],
-  	"business": ["business"],
-  	"entertainment": ["entertainment"],
-  	"music": ["music"],
-  	"science": ["science"],
-  	"nature": ["nature"],
-  	"sport": ["sport"],
-  	"technology":["technology", "tech", "automation", "machinery", "computers"]
+      general: ["general"],
+      business: ["business"],
+      entertainment: ["entertainment"],
+      gaming: ["gaming"],
+      science: ["science"],
+      sport: ["sport"],
+      technology:["technology", "tech", "automation", "machinery", "computers"]
   }
   var parsed = text.toLowerCase().split(" ");
-    for(var i=0;i<parsed.length;i++){
-      for(var p in dictionary){
-        if(dictionary[p].indexOf(parsed[i])!==-1){
-           return JSON.stringify(p);
-           console.log(JSON.stringify(p));
-           console.log(JSON.stringify(dictionary[p]));
-         }
+  var s;
+  for(var i=0;i<parsed.length;i++){
+  for(var p in dictionary){
+      if(dictionary[p].indexOf(parsed[i])!==-1){
+         s=p;
+          break;
       }
     }
+  }
+  var theUrl="https://newsapi.org/v1/sources?category="+s;
+
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+  xmlHttp.send( null );
+  var sources=xmlHttp.responseText;
+  sources=JSON.parse(sources);
+
+  var sourceids=[];
+  for(var i=0;i<sources["sources"].length;i++){
+      sourceids.push(sources["sources"][i]["id"]);
+  }
+  //console.log(sourceids);
+  var apikey="a16f39b8980544fd91723092e5f11105";
+  var returnarr=[];
+  for(var i=0;i<sourceids.length;i++){
+      var theUrl2= "https://newsapi.org/v1/articles?source="+sourceids[i]+"&apiKey="+apikey;
+     //console.log(theUrl2);
+
+     var xmlHttp2 = new XMLHttpRequest();
+     xmlHttp2.open( "GET", theUrl2, false ); // false for synchronous request
+     xmlHttp2.send( null );
+     var articles=xmlHttp2.responseText;
+      articles=JSON.parse(articles);
+      articles=articles["articles"];
+      for(var j=0;j<articles.length;j++){
+          var articletoadd={};
+          articletoadd["url"]=articles[j]["url"];
+          articletoadd["imageurl"]=articles[j]["urlToImage"];
+          articletoadd["title"]=articles[j]["title"];
+          articletoadd["description"]=articles[j]["description"];
+          returnarr.push(articletoadd);
+          if(returnarr.length==4){
+          break;
+      }
+      }
+      if(returnarr.length==4){
+          break;
+      }
+  }
+  var returnarray = JSON.stringify(returnarr);
+  return returnarray;
+  /*
+  var article = JSON.stringify(returnarr);
+
+  var title;
+  var description;
+  var url;
+  var imageURL;
+  */
 }
 
 function sendTextMessage(sender, text) {
