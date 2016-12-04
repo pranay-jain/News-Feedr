@@ -58,7 +58,9 @@ function receivedTextMessage(text) {
   var s;
   for(var i=0;i<parsed.length;i++) {
     for(var p in dictionary) {
+      console.log(p);
       if(parsed.indexOf(p)!==-1) {
+        console.log("found" + p);
          s = p;
           break;
       }
