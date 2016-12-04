@@ -65,7 +65,7 @@ function receivedTextMessage(text) {
   //for(var i=0;i<parsed.length;i++) {
     for(var p in dictionary) {
       console.log(p);
-      if(parsed.indexOf(p)!==-1) {
+      if(parsed.indexOf(p) > -1) {
         console.log("found" + p);
          s = p;
           break;
@@ -73,7 +73,7 @@ function receivedTextMessage(text) {
     }
   //}
 
-  var theUrl= "https://newsapi.org/v1/sources?category="+s;
+  var theUrl= "https://newsapi.org/v1/sources?category=business";
 
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
