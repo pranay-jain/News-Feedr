@@ -1,6 +1,6 @@
 'use strict';
 
-const 
+const
   bodyParser = require('body-parser'),
   express = require('express'),
   https = require('https');
@@ -11,7 +11,7 @@ app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 
 // App Credentials
-const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ? 
+const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ?
   process.env.MESSENGER_APP_SECRET :
   config.get('appSecret');
 
@@ -25,8 +25,8 @@ const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
   (process.env.MESSENGER_PAGE_ACCESS_TOKEN) :
   config.get('pageAccessToken');
 
-// URL where the app is running (include protocol). Used to point to scripts and 
-// assets located at this address. 
+// URL where the app is running (include protocol). Used to point to scripts and
+// assets located at this address.
 const SERVER_URL = (process.env.SERVER_URL) ?
   (process.env.SERVER_URL) :
   config.get('serverURL');
@@ -36,13 +36,17 @@ if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
   process.exit(1);
 }
 
-app.post('/webhook', (req, res) => {
+app.get('/', function (req, res) {
+    res.send('Hello world, I am a chat bot')
+})
+
+app.post('/webhook/', (req, res) => {
 	if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === process.env.VALIDATION_TOKEN) {
 	    console.log("Validating webhook");
 	    res.status(200).send(req.query['hub.challenge']);
 	} else {
 		console.error("Failed validation. Make sure the validation tokens match.");
-    	res.sendStatus(403); 
+    	res.sendStatus(403);
 	}
 });
 
@@ -50,21 +54,3 @@ app.post('/webhook', (req, res) => {
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
