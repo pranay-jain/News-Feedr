@@ -113,6 +113,7 @@ function receivedTextMessage(text) {
   return returnarray;
 }
 
+const token = process.env.FB_PAGE_ACCESS_TOKEN
 function sendTextMessage(sender, text) {
     //let data = { text:text }
     //console.log(data);
@@ -125,7 +126,7 @@ function sendTextMessage(sender, text) {
         method: 'POST',
         json: {
             recipient: {id:sender},
-            message: first['description'],
+            message: {text:first['description']},
         }
     }, function(error, response, body) {
         if (error) {
@@ -136,4 +137,4 @@ function sendTextMessage(sender, text) {
     })
 }
 
-const token = process.env.FB_PAGE_ACCESS_TOKEN
+
