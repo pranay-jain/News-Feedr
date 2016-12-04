@@ -114,17 +114,18 @@ function receivedTextMessage(text) {
 }
 
 function sendTextMessage(sender, text) {
-    let data = { text:text }
-    console.log(data);
-    let messageData = JSON.parse(data[0]);
-    console.log(messageData['description']);
+    //let data = { text:text }
+    //console.log(data);
+    let messageData = JSON.parse(text);
+    let first = messageData[0];
+    console.log(first['description']);
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token:token},
         method: 'POST',
         json: {
             recipient: {id:sender},
-            message: messageData['description'],
+            message: first['description'],
         }
     }, function(error, response, body) {
         if (error) {
