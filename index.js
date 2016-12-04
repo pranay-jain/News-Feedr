@@ -1,9 +1,8 @@
-'use strict'
-
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -55,17 +54,18 @@ function receivedTextMessage(text) {
       sport: ["sport"],
       technology:["technology", "tech", "automation", "machinery", "computers"]
   }
-  var parsed = text.toLowerCase().split(" ");
+  var parsed = text.toLowerCase();
   var s;
-  for(var i=0;i<parsed.length;i++){
-  for(var p in dictionary){
-      if(dictionary[p].indexOf(parsed[i])!==-1){
-         s=p;
+  //for(var i=0;i<parsed.length;i++) {
+    for(var p in dictionary) {
+      if(parsed.indexOf(p)!==-1) {
+         s = p;
           break;
       }
-    }
   }
-  var theUrl="https://newsapi.org/v1/sources?category="+s;
+  //}
+
+  var theUrl= "https://newsapi.org/v1/sources?category="+s;
 
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
@@ -107,19 +107,6 @@ function receivedTextMessage(text) {
   }
   var returnarray = JSON.stringify(returnarr);
   return returnarray;
-  /*
-=======
-  return JSON.stringify(returnarr);
-
->>>>>>> 70a68e408144ecfe71d7e6a69461afedf5372b66
-  var article = JSON.stringify(returnarr);
-
-  var title;
-  var description;
-  var url;
-  var imageURL;
-<<<<<<< HEAD
-  */
 }
 
 function sendTextMessage(sender, text) {
