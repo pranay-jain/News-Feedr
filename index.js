@@ -72,7 +72,7 @@ function receivedTextMessage(text) {
   xmlHttp.send( null );
   var sources=xmlHttp.responseText;
   var allSources=JSON.parse(sources);
-
+  console.log(sources)
   var sourceids=[];
   for(var i=0;i<allSources["sources"].length;i++){
       sourceids.push(sources["sources"][i]["id"]);
