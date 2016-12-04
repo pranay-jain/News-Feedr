@@ -71,10 +71,10 @@ function receivedTextMessage(text) {
   xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
   xmlHttp.send( null );
   var sources=xmlHttp.responseText;
-  sources=JSON.parse(sources);
+  var allSources=JSON.parse(sources);
 
   var sourceids=[];
-  for(var i=0;i<sources["sources"].length;i++){
+  for(var i=0;i<allSources["sources"].length;i++){
       sourceids.push(sources["sources"][i]["id"]);
   }
   //console.log(sourceids);
