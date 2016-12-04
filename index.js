@@ -83,7 +83,7 @@ function receivedTextMessage(text) {
   console.log(sources)
   var sourceids=[];
   for(var i=0;i<allSources["sources"].length;i++){
-      sourceids.push(sources["sources"][i]["id"]);
+      sourceids.push(allSources["sources"][i]["id"]);
   }
   //console.log(sourceids);
   var apikey="a16f39b8980544fd91723092e5f11105";
