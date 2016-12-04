@@ -109,6 +109,7 @@ function receivedTextMessage(text) {
       }
   }
   var returnarray = JSON.stringify(returnarr);
+  console.log(returnarray);
   return returnarray;
 }
 
