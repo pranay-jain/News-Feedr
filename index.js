@@ -1,8 +1,9 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const request = require('request')
-const app = express()
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const express = require('express'),
+      bodyParser = require('body-parser'),
+      request = require('request'),
+      XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
+var app = express();
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -20,9 +21,9 @@ app.get('/', function (req, res) {
 // for Facebook verification
 app.get('/webhook/', function (req, res) {
     if (req.query['hub.verify_token'] === process.env.FB_VERIFICATION_TOKEN) {
-        res.send(req.query['hub.challenge'])
+        res.send(req.query['hub.challenge']);
     }
-    res.send('Error, wrong token')
+    res.send('Error, wrong token');
 });
 
 // Spin up the server
@@ -36,12 +37,12 @@ app.post('/webhook/', function (req, res) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
         if (event.message && event.message.text) {
-          console.log("entered" + event.message.text);
-          var text = receivedTextMessage(event.message.text)
-            sendTextMessage(sender, text)
+            console.log("entered" + event.message.text);
+            let text = receivedTextMessage(event.message.text);
+            sendTextMessage(sender, text);
         }
     }
-    res.sendStatus(200)
+    res.sendStatus(200);
 });
 
 function receivedTextMessage(text) {
@@ -57,18 +58,16 @@ function receivedTextMessage(text) {
   }
   var parsed = text.toLowerCase();
   var s;
-  //for(var i=0;i<parsed.length;i++) {
-    for(var p in dictionary) {
-      //console.log(p);
-      if(parsed.indexOf(p) > -1) {
-        console.log("found" + p);
-         s = p;
-          break;
-      }
+  for(var p in dictionary) {
+    if(parsed.indexOf(p) > -1) {
+      console.log("found" + p);
+       s = p;
+        break;
     }
-  //}
+  }
 
-  var theUrl= "https://newsapi.org/v1/sources?category=" + s;
+  var theUrl= "https://newsapi.org/v1/sources?category="+s;
+  console.log(theUrl);
 
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
@@ -77,7 +76,7 @@ function receivedTextMessage(text) {
   var allSources=JSON.parse(sources);
   //console.log(sources)
   var sourceids=[];
-  for(var i=0;i<allSources["sources"].length;i++){
+  for(var i=0;i<allSources["sources"].count;i++){
       sourceids.push(allSources["sources"][i]["id"]);
   }
   //console.log(sourceids);
