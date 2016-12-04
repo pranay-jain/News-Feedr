@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -59,13 +60,12 @@ function receivedTextMessage(text) {
     for(var p in dictionary) {
       if(parsed.indexOf(p)!==-1) {
          s = p;
-         console.log("found " + s);
           break;
       }
   }
   //}
 
-  var theUrl= "https://newsapi.org/v1/sources?category=" +s;
+  var theUrl= "https://newsapi.org/v1/sources?category="+s;
 
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
