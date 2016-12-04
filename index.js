@@ -37,12 +37,36 @@ app.post('/webhook/', function (req, res) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
         if (event.message && event.message.text) {
-            let text = event.message.text
+            let text = receivedTextMessage(event.message.text)
             sendTextMessage(sender, "Text received, bitch: " + text.substring(0, 200))
         }
     }
     res.sendStatus(200)
 });
+
+function receivedTextMessage(text) {
+  //var dict = dictionary;
+  var dictionary = {
+  	"economics": ["economics"],
+  	"business": ["business"],
+  	"entertainment": ["entertainment"],
+  	"music": ["music"],
+  	"science": ["science"],
+  	"nature": ["nature"],
+  	"sport": ["sport"],
+  	"technology":["technology", "tech", "automation", "machinery", "computers"]
+  }
+  var parsed = text.toLowerCase().split(" ");
+    for(var i=0;i<parsed.length;i++){
+      for(var p in dictionary){
+        if(dictionary[p].indexOf(parsed[i])!==-1){
+           return JSON.stringify(p);
+           console.log(JSON.stringify(p));
+           console.log(JSON.stringify(dictionary[p]));
+         }
+      }
+    }
+}
 
 function sendTextMessage(sender, text) {
     let messageData = { text:text }
