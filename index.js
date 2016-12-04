@@ -51,7 +51,7 @@ function receivedTextMessage(text) {
       business: ["business"],
       entertainment: ["entertainment"],
       gaming: ["gaming"],
-      science-and-nature: ["science"],
+      scienceAndNature: ["science"],
       sport: ["sport"],
       technology:["technology", "tech", "automation", "machinery", "computers"]
   }
