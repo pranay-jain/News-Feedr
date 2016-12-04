@@ -113,8 +113,8 @@ function receivedTextMessage(text) {
 }
 
 function sendTextMessage(sender, text) {
-    //let messageData = { text:text }
-    let messageData = JSON.parse(text);
+    let data = { text:text }
+    let messageData = JSON.parse(data);
     console.log(messageData['description']);
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
