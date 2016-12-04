@@ -55,7 +55,8 @@ function receivedTextMessage(text) {
       sport: ["sport"],
       technology:["technology", "tech", "automation", "machinery", "computers"]
   }
-  var parsed = text.toLowerCase().split(" ");
+  var txt = {text:text};
+  var parsed = txt.toLowerCase().split(" ");
   var s;
   for(var i=0;i<parsed.length;i++){
   for(var p in dictionary){
