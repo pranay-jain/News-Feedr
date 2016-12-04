@@ -38,7 +38,7 @@ app.post('/webhook/', function (req, res) {
         let sender = event.sender.id
         if (event.message && event.message.text) {
             let text = receivedTextMessage(event.message.text)
-            sendTextMessage(sender, text)
+            sendTextMessage(sender,"Message:" + text)
         }
     }
     res.sendStatus(200)
@@ -108,17 +108,22 @@ function receivedTextMessage(text) {
   var returnarray = JSON.stringify(returnarr);
   return returnarray;
   /*
+=======
+  return JSON.stringify(returnarr);
+
+>>>>>>> 70a68e408144ecfe71d7e6a69461afedf5372b66
   var article = JSON.stringify(returnarr);
 
   var title;
   var description;
   var url;
   var imageURL;
+<<<<<<< HEAD
   */
 }
 
 function sendTextMessage(sender, text) {
-    let messageData = { text:text }
+    let messageData = { text:title }
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token:token},
