@@ -109,13 +109,14 @@ function receivedTextMessage(text) {
       }
   }
   var returnarray = JSON.stringify(returnarr);
-  console.log(returnarray);
+  //console.log(returnarray);
   return returnarray;
 }
 
 function sendTextMessage(sender, text) {
-    //let data = { text:text }
-    let messageData = JSON.parse(text[0]);
+    let data = { text:text }
+    console.log(data);
+    let messageData = JSON.parse(data[0]);
     console.log(messageData['description']);
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
