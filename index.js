@@ -37,12 +37,7 @@ app.post('/webhook/', function (req, res) {
         let sender = event.sender.id
         if (event.message && event.message.text) {
           console.log("entered" + event.message.text);
-          var text;
-          if (event.message.text === "Hi" || event.message.text === "Hello" || event.message.text === "business") {
-            text = "you entered " + event.message.text;
-          } else {
-            text = receivedTextMessage(event.message.text)
-          }
+          var text = receivedTextMessage(event.message.text)
             sendTextMessage(sender,"Message:" + text)
         }
     }
@@ -64,7 +59,7 @@ function receivedTextMessage(text) {
   var s;
   //for(var i=0;i<parsed.length;i++) {
     for(var p in dictionary) {
-      console.log(p);
+      //console.log(p);
       if(parsed.indexOf(p) > -1) {
         console.log("found" + p);
          s = p;
@@ -80,7 +75,7 @@ function receivedTextMessage(text) {
   xmlHttp.send( null );
   var sources=xmlHttp.responseText;
   var allSources=JSON.parse(sources);
-  console.log(sources)
+  //console.log(sources)
   var sourceids=[];
   for(var i=0;i<allSources["sources"].length;i++){
       sourceids.push(allSources["sources"][i]["id"]);
@@ -120,6 +115,7 @@ function receivedTextMessage(text) {
 function sendTextMessage(sender, text) {
     //let messageData = { text:text }
     let messageData = JSON.parse(text);
+    console.log(messageData['description']);
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token:token},
