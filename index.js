@@ -118,7 +118,7 @@ function receivedTextMessage(text) {
   var description;
   var url;
   var imageURL;
-<<<<<<< HEAD
+<<<<<<< HEAD  
   */
 }
 
