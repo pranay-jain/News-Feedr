@@ -36,6 +36,7 @@ app.post('/webhook/', function (req, res) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
         if (event.message && event.message.text) {
+          console.log("entered" + event.message.text);
             let text = receivedTextMessage(event.message.text)
             sendTextMessage(sender,"Message:" + text)
         }
@@ -54,9 +55,9 @@ function receivedTextMessage(text) {
       sport: ["sport"],
       technology:["technology", "tech", "automation", "machinery", "computers"]
   }
-  var parsed = text.toLowerCase().split();
+  var parsed = text.toLowerCase();
   var s;
-  for(var i=0;i<parsed.length;i++) {
+  //for(var i=0;i<parsed.length;i++) {
     for(var p in dictionary) {
       console.log(p);
       if(parsed.indexOf(p)!==-1) {
@@ -65,7 +66,7 @@ function receivedTextMessage(text) {
           break;
       }
     }
-  }
+  //}
 
   var theUrl= "https://newsapi.org/v1/sources?category="+s;
 
