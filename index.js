@@ -107,19 +107,6 @@ function receivedTextMessage(text) {
   }
   var returnarray = JSON.stringify(returnarr);
   return returnarray;
-  /*
-=======
-  return JSON.stringify(returnarr);
-
->>>>>>> 70a68e408144ecfe71d7e6a69461afedf5372b66
-  var article = JSON.stringify(returnarr);
-
-  var title;
-  var description;
-  var url;
-  var imageURL;
-<<<<<<< HEAD  
-  */
 }
 
 function sendTextMessage(sender, text) {
