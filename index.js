@@ -37,10 +37,11 @@ app.post('/webhook/', function (req, res) {
         let sender = event.sender.id
         if (event.message && event.message.text) {
           console.log("entered" + event.message.text);
+          var text;
           if (event.message.text === "Hi" || event.message.text === "Hello" || event.message.text === "business") {
-            let text = "you enetered " + event.message.text;
+            text = "you entered " + event.message.text;
           } else {
-            let text = receivedTextMessage(event.message.text)
+            text = receivedTextMessage(event.message.text)
           }
             sendTextMessage(sender,"Message:" + text)
         }
