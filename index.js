@@ -55,16 +55,18 @@ function receivedTextMessage(text) {
       sport: ["sport"],
       technology:["technology", "tech", "automation", "machinery", "computers"]
   }
-  var parsed = text.toLowerCase().split(" ");
+  var parsed = text.toLowerCase();
   var s;
-  for(var i=0;i<parsed.length;i++){
-  for(var p in dictionary){
-      if(dictionary[p].indexOf(parsed[i])!==-1){
-         s=p;
+  //for(var i=0;i<parsed.length;i++) {
+    for(var p in dictionary) {
+      if(parsed.indexOf(p)!==-1) {
+         s = p;
+         console.log("found " + s);
           break;
       }
-    }
   }
+  //}
+
   var theUrl="https://newsapi.org/v1/sources?category="+s;
 
   var xmlHttp = new XMLHttpRequest();
